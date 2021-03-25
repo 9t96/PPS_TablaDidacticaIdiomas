@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "io.ionic.tabla.didactica",
   "appName": "TablaDidactica",
   "bundledWebRuntime": false,
   "npmClient": "npm",
