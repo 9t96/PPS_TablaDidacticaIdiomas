@@ -1,14 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true" style="display: flex; flex-direction: column">
-  <ion-button color="danger" expand="full">uno</ion-button>
-  <ion-button color="warning" expand="full">dos</ion-button>
-  <ion-button color="primary" expand="full">tres</ion-button>
-  <ion-button color="secondary" expand="full">cuatro</ion-button>
+  <ion-button color="danger" expand="full" (click)="PlaySound()">uno</ion-button>
+  <ion-button color="warning" expand="full" (click)="PlaySound()">dos</ion-button>
+  <ion-button color="primary" expand="full" (click)="PlaySound()">tres</ion-button>
+  <ion-button color="secondary" expand="full"(click)="PlaySound()">cuatro</ion-button>
+  <ion-button color="dark" expand="full"(click)="PlaySound()">cinco</ion-button>
+
+  <ion-fab horizontal="start" vertical="top" slot="fixed">
+    <ion-fab-button color="warning">
+      <ion-icon md="caret-up" ios="chevron-down-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button color="light">
+        <ion-icon name="color-palette-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger">
+      <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="light">
+        <ion-icon name="color-palette-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

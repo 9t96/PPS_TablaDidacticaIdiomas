@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.tabla.didactica",
+  "appName": "TablaDidactica",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}
