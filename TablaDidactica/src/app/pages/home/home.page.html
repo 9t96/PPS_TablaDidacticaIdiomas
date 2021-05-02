@@ -1,42 +1,48 @@
 
 <ion-content [fullscreen]="true" style="display: flex; flex-direction: column">
-  <ion-button color="danger" expand="full" (click)="PlaySound()">uno</ion-button>
-  <ion-button color="warning" expand="full" (click)="PlaySound()">dos</ion-button>
-  <ion-button color="primary" expand="full" (click)="PlaySound()">tres</ion-button>
-  <ion-button color="secondary" expand="full"(click)="PlaySound()">cuatro</ion-button>
-  <ion-button color="dark" expand="full"(click)="PlaySound()">cinco</ion-button>
+
+
+  <ion-button *ngFor="let item of tema" expand="full" (click)="PlaySound(item.sound_id)">
+    <img [src]="item.img_src" alt="" expand="full" >
+  </ion-button>
 
   <ion-fab horizontal="start" vertical="top" slot="fixed">
     <ion-fab-button color="warning">
-      <ion-icon md="caret-up" ios="chevron-down-circle-outline"></ion-icon>
+      <img  [src]="language.src" alt="">
     </ion-fab-button>
     <ion-fab-list side="bottom">
-      <ion-fab-button color="light">
-        <ion-icon name="color-palette-outline"></ion-icon>
+      <ion-fab-button>
+        <img src="../../../assets/images/spain.png" alt="" (click)="CambiarIdioma('es')">
       </ion-fab-button>
-      <ion-fab-button color="light">
-        <ion-icon name="calendar-number-outline"></ion-icon>
+      <ion-fab-button>
+        <img src="../../../assets/images/portugal.png" alt="" (click)="CambiarIdioma('br')">
       </ion-fab-button>
-      <ion-fab-button color="light">
-        <ion-icon name="logo-vimeo"></ion-icon>
+      <ion-fab-button>
+        <img src="../../../assets/images/united-kingdom.png" alt="" (click)="CambiarIdioma('en')">
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 
   <ion-fab horizontal="start" vertical="bottom" slot="fixed">
     <ion-fab-button color="danger">
-      <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+      <img [src]="theme.src" alt="">
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button color="light">
-        <ion-icon name="color-palette-outline"></ion-icon>
+      <ion-fab-button color="light" (click)="CambiarTema(3)">
+        <img src="../../../assets/images/cube-icon.png" alt="" >
       </ion-fab-button>
-      <ion-fab-button color="light">
-        <ion-icon name="calendar-number-outline"></ion-icon>
+      <ion-fab-button color="light" (click)="CambiarTema(1)">
+        <img src="../../../assets/images/paw-icon.png" alt="">
       </ion-fab-button>
-      <ion-fab-button color="light">
-        <ion-icon name="logo-vimeo"></ion-icon>
+      <ion-fab-button color="light" (click)="CambiarTema(2)">
+        <img src="../../../assets/images/pallet-icon.png" alt="">
       </ion-fab-button>
     </ion-fab-list>
+  </ion-fab>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger" (click)="presentAlert()">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 </ion-content>

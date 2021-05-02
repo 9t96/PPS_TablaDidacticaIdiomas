@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import {ErrorStateMatcher} from '@angular/material/core';
 
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 class User{
   email:string;
   password:string;
@@ -14,18 +23,20 @@ class User{
 })
 export class LoginPage implements OnInit {
 
-
   user: User;
-  loginForm = this.fromBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-  })
+  loginForm: FormGroup;
+
+  matcher = new MyErrorStateMatcher();
+
   constructor(private authService: AuthService, private router: Router, private fromBuilder: FormBuilder) { 
     this.user = new User();
   }
 
   ngOnInit() {
-    
+    this.loginForm = this.fromBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required])]
+    })
   }
 
 
@@ -37,7 +48,7 @@ export class LoginPage implements OnInit {
       this.router.navigate(['home']);
     })
     .catch( err =>{ 
-      console.log(err);
+      /* err.code == "auth/wrong-password" ? this.openSnackBar("Uno o mas campos son invalidos...") : this.openSnackBar("Ha ocurrido un error vuelva a intentar.") */
     })
   }
 
@@ -52,7 +63,7 @@ export class LoginPage implements OnInit {
         this.loginForm.controls['password'].setValue('222222')
         break;
       case 3:
-        this.loginForm.controls['email'].setValue('usuerio@usuario.com') 
+        this.loginForm.controls['email'].setValue('usuario@usuario.com') 
         this.loginForm.controls['password'].setValue('333333')
         break;
       case 4:
@@ -66,5 +77,13 @@ export class LoginPage implements OnInit {
     }
     
   }
+
+/*   openSnackBar(message: string) {
+    this._snackBar.open(message, 'Cerrar', {
+      duration: 1500,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  } */
 
 }
