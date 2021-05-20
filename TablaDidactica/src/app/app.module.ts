@@ -18,6 +18,8 @@ import { environment } from 'src/environments/environment';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -34,6 +36,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     StatusBar,
     SplashScreen,
     NativeAudio,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

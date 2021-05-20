@@ -1,7 +1,7 @@
 
-<ion-content [fullscreen]="true" style="display: flex; flex-direction: column">
+<ion-content [fullscreen]="true">
 
-
+<div *ngIf="!showSpinner">
   <ion-button *ngFor="let item of tema" expand="full" (click)="PlaySound(item.sound_id)">
     <img [src]="item.img_src" alt="" expand="full" >
   </ion-button>
@@ -45,4 +45,7 @@
       <ion-icon name="exit-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+</div>
+<img *ngIf="showSpinner" src="../../../assets/tdi-spinner.gif" alt="" style="display: flex;
+margin: 0 auto;">
 </ion-content>

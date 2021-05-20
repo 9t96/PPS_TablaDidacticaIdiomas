@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import {ErrorStateMatcher} from '@angular/material/core';
-
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -25,14 +25,20 @@ export class LoginPage implements OnInit {
 
   user: User;
   loginForm: FormGroup;
+  message: string
+  showErrorHint: boolean;
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private authService: AuthService, private router: Router, private fromBuilder: FormBuilder) { 
+  constructor(private authService: AuthService, private router: Router, private fromBuilder: FormBuilder, private screenOrientation: ScreenOrientation) { 
     this.user = new User();
+  }
+  ionViewWillEnter(){
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 
   ngOnInit() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     this.loginForm = this.fromBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required])]
@@ -48,8 +54,16 @@ export class LoginPage implements OnInit {
       this.router.navigate(['home']);
     })
     .catch( err =>{ 
-      /* err.code == "auth/wrong-password" ? this.openSnackBar("Uno o mas campos son invalidos...") : this.openSnackBar("Ha ocurrido un error vuelva a intentar.") */
+      err.code == "auth/wrong-password" ? this.ErrorHint("Uno o mas campos son invalidos...") : this.ErrorHint("Ha ocurrido un error vuelva a intentar.")
     })
+  }
+
+  ErrorHint(message:string){
+    this.message = message;
+    this.showErrorHint = true;
+    setTimeout(() => {
+      this.showErrorHint = false;
+    }, 4000);
   }
 
   testUser(accountNumber: number){

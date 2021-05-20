@@ -1,9 +1,34 @@
 
 ion-content{
-  ion-button{
-    height: 20%;
-    img{
-      height: 10em;
+  --background: linear-gradient(180deg, rgba(244,111,59,1) 14%, rgba(253,167,20,1) 96%);
+}
+@media screen and (orientation:portrait) {
+  ion-content{
+    display: flex; 
+    flex-direction: column;
+    div{
+      height: 100%;
+      ion-button{
+        height: 20%;
+        img{
+          height: 10em;
+        }
+      }
+    }
+
+  }
+}
+
+@media screen and (orientation:landscape) {
+  ion-content{
+    div{
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      ion-button{
+        height: 100%;
+        width: 20%;
+      }
     }
   }
 }

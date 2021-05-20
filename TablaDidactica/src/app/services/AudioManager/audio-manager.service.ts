@@ -60,7 +60,7 @@ export class AudioManagerService {
 
     //Animales
     this.preload('ballena_en', 'assets/sonidos/en/animales/whale.mp3');
-    this.preload('cocodrillo_en', 'assets/sonidos/enes/animales/aligator.mp3');
+    this.preload('cocodrillo_en', 'assets/sonidos/en/animales/aligator.mp3');
     this.preload('elefante_en', 'assets/sonidos/en/animales/elephant.mp3');
     this.preload('jirafa_en', 'assets/sonidos/en/animales/giraffe.mp3');
     this.preload('leon_en', 'assets/sonidos/en/animales/lion.mp3');
@@ -82,14 +82,14 @@ export class AudioManagerService {
     //Animales
     this.preload('ballena_br', 'assets/sonidos/br/animales/baleia.mp3');
     this.preload('cocodrillo_br', 'assets/sonidos/br/animales/jacare.mp3');
-    this.preload('elefante_br', 'assets/sonidos/br/animales/elefante.mp3');
     this.preload('jirafa_br', 'assets/sonidos/br/animales/jirafa.mp3');
     this.preload('leon_br', 'assets/sonidos/br/animales/leon.mp3');
+    this.preload('elefante_br', 'assets/sonidos/br/animales/elefantebr.mp3');
     //Colores
     this.preload('amarillo_br', 'assets/sonidos/br/colores/amarelo.mp3');
-    this.preload('azul_br', 'assets/sonidos/br/colores/azul.mp3');
-    this.preload('naranja_pbrt', 'assets/sonidos/br/colores/naranja.mp3');
-    this.preload('rojo_br', 'assets/sonidos/br/colores/rojo.mp3');
+    this.preload('azul_br', 'assets/sonidos/es/colores/azul.mp3');
+    this.preload('naranja_br', 'assets/sonidos/br/colores/laranja.mp3');
+    this.preload('rojo_br', 'assets/sonidos/br/colores/vermelho.mp3');
     this.preload('verde_br', 'assets/sonidos/br/colores/verde.mp3');
     //Numeros
     this.preload('uno_br', 'assets/sonidos/br/numeros/um.mp3');

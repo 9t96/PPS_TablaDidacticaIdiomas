@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { AudioManagerService } from 'src/app/services/AudioManager/audio-manager.service';
 import { eTema } from 'src/app/shared/clases/eTema';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { AuthService } from 'src/app/services/auth.service';
 
 const tAnimales = [
   {
@@ -29,7 +31,7 @@ const tAnimales = [
     tipo: eTema.ANIMALES ,
     nombre: "Elefante",
     img_src: "../../assets/images/animales/elephant.svg",
-    sound_id: "jirafa",
+    sound_id: "elefante",
     background: "red"
   },
   {
@@ -129,8 +131,9 @@ export class HomePage implements OnInit{
   theme: any;
   selectedLang: string;
   tema: Array<any>;
+  showSpinner: Boolean = true;
 
-  constructor(public audioManager: AudioManagerService, public alertController: AlertController) {
+  constructor(public audioManager: AudioManagerService, public alertController: AlertController, private screenOrientation: ScreenOrientation, private authSrv: AuthService) {
     this.language = {
       src:"../../../assets/images/spain.png",
       id: "es"
@@ -141,8 +144,13 @@ export class HomePage implements OnInit{
       id: "cubes"
     }
   }
-
+  ionViewWillEnter(){
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+  }
   ngOnInit(){
+    setTimeout(() => {
+      this.showSpinner = false;
+    }, 2000);  
     this.audioManager.cargarAudiosEs();
     this.audioManager.cargarAudiosEn();
     this.audioManager.cargarAudiosBr();
@@ -150,7 +158,7 @@ export class HomePage implements OnInit{
   }
 
   PlaySound(sound_id: string){
-    this.audioManager.reproducirAudio(sound_id + "_"+this.language.id, 3);
+    this.audioManager.reproducirAudio(sound_id + "_"+this.language.id, 4);
   }
 
   CambiarIdioma(lang: string){
@@ -179,12 +187,24 @@ export class HomePage implements OnInit{
   CambiarTema(tema: eTema){
     switch (tema) {
       case eTema.ANIMALES:
+        this.theme = {
+          src: "../../../assets/images/paw-icon.png",
+          id: "cubes"
+        }
         this.tema = tAnimales
         break;
       case eTema.COLORES:
+        this.theme = {
+          src: "../../../assets/images/pallet-icon.png",
+          id: "cubes"
+        }
         this.tema = tColores
         break;
       case eTema.NUMEROS:
+        this.theme = {
+          src: "../../../assets/images/cube-icon.png",
+          id: "cubes"
+        }
         this.tema = tNumeros
         break;
     }
@@ -192,21 +212,21 @@ export class HomePage implements OnInit{
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
+      cssClass: 'alertLogout',
+      header: '¿Esta seguro que desea cerrar la sesion?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'alert-button',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'Okay',
+          text: 'Si, cerrar',
+          cssClass: 'alert-button-red',
           handler: () => {
+            this.authSrv.SignOut();
             console.log('Confirm Okay');
           }
         }

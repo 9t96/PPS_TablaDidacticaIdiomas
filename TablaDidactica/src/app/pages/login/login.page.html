@@ -19,14 +19,14 @@
     ></path>
   </svg>
   <ion-row>
-    <img src="../../../assets/pruebasvg.png" alt="" />
+    <img class="logo" src="../../../assets/pruebasvg.png" alt="" />
     <p>¡Ingresa y aprendé!</p>
   </ion-row>
   <form [formGroup]="loginForm">
     <mat-card>
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
+          <mat-label>Correo electronico</mat-label>
           <input
             matInput
             type="email"
@@ -35,13 +35,15 @@
             placeholder="Correo electronico"
           />
           <mat-error
-          *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)"
-        >
-          Por favor, ingrese un correo valido.
-        </mat-error>
-        <mat-error *ngIf="loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)">
-          Este campo es obligatorio
-        </mat-error>
+            *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)"
+          >
+            Por favor, ingrese un correo valido.
+          </mat-error>
+          <mat-error
+            *ngIf="loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)"
+          >
+            Este campo es obligatorio
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
@@ -53,12 +55,20 @@
             required
             placeholder="Contraseña"
           />
-          <mat-error *ngIf="loginForm.get('password').hasError('required') && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+          <mat-error
+            *ngIf="loginForm.get('password').hasError('required') && (loginForm.get('password').dirty || loginForm.get('password').touched)"
+          >
             Este campo es obligatorio
           </mat-error>
         </mat-form-field>
 
         <ion-row>
+          <ion-col>
+            <div *ngIf="showErrorHint" class="input-hint">
+              <ion-icon name="alert-outline"></ion-icon>
+              <small>{{message}}</small>
+            </div>
+          </ion-col>
           <ion-col>
             <ion-button
               class="submit-btn"
@@ -83,7 +93,7 @@
       <input type="password" formControlName="password" required placeholder="Contraseña">
     </div> -->
   </form>
-<!--   <ion-row>
+  <!--   <ion-row>
     <ion-col>
       <ion-button (click)="testUser(1)" color="success" expand="block">
         Test User 1
@@ -119,26 +129,63 @@
     </ion-col>
   </ion-row> -->
 
-  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+  <!--   <ion-fab horizontal="start" vertical="bottom" slot="fixed">
     <ion-fab-button color="danger">
       <ion-icon name="people-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button color="light" (click)="testUser(1)">
-        Admin
-      </ion-fab-button>
-      <ion-fab-button color="dark" (click)="testUser(2)">
-        Invi
-      </ion-fab-button>
-      <ion-fab-button color="medium" (click)="testUser(3)">
-        User
-      </ion-fab-button>
-      <ion-fab-button color="primary" (click)="testUser(4)">
-        Anon
-      </ion-fab-button>
-      <ion-fab-button color="secondary" (click)="testUser(5)">
-        Test
-      </ion-fab-button>
-    </ion-fab-list>
+    <ion-fab-list side="top"> -->
+  <ion-grid>
+    <ion-row style="justify-content: space-around">
+      <ion-col>
+        <div>
+          <ion-fab-button color="light" (click)="testUser(1)">
+            <img src="../../../assets/images/animales/lion.svg" alt="" />
+          </ion-fab-button>
+          <b>Admin</b>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-fab-button color="dark" (click)="testUser(2)">
+            <img src="../../../assets/images/animales/giraffe.svg" alt="" />
+          </ion-fab-button>
+          <b>Invitado</b>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="justify-content: center">
+      <ion-col>
+        <div>
+          <ion-fab-button color="medium" (click)="testUser(3)">
+            <img src="../../../assets/images/animales/elephant.svg" alt="" />
+          </ion-fab-button>
+          <b>User</b>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="justify-content: space-around">
+      <ion-col>
+        <div>
+          <ion-fab-button color="primary" (click)="testUser(4)">
+            <img src="../../../assets/images/animales/whale.svg" alt="" />
+          </ion-fab-button>
+          <b>Anonimo</b>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-fab-button color="secondary" (click)="testUser(5)">
+            <img src="../../../assets/images/animales/cocodrile.svg" alt="" />
+          </ion-fab-button>
+          <b>Test</b>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--     </ion-fab-list>
   </ion-fab>
+</ion-content> -->
 </ion-content>
